@@ -9,7 +9,7 @@
 int main(int argc, char *argv[]) {
     char* input = getInput(argv[0]);
 
-    int totalWrappingPaper = 0;
+    int totalRibbon = 0;
 
     int i = 0;
     char ch;
@@ -31,10 +31,10 @@ int main(int argc, char *argv[]) {
             presentDimension++;
             i++;
         } while (ch != '\n');
-        totalWrappingPaper += getWrappingPaperNeededInSquareFoot(present);
+        totalRibbon += getRibbonNeededInFoot(present);
     }
 
-    printf("Wrapping paper needed: %i", totalWrappingPaper);
+    printf("Ribbon needed: %i", totalRibbon);
     return 0;
 }
 

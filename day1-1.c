@@ -3,7 +3,7 @@
 //
 
 #include <stdio.h>
-#include "util.h"
+#include "util/general.h"
 
 int main(int argc, char *argv[]) {
     char* input = getInput(argv[0]);

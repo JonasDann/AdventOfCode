@@ -4,7 +4,9 @@
 
 #include <stdio.h>
 #include <string.h>
-#include "util.h"
+#include "general.h"
+
+int static PROGRAM_NAME_LENGTH = 10;
 
 int getLength(FILE *fp) {
     char ch;
