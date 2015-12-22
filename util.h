@@ -5,7 +5,7 @@
 #ifndef ADVENTOFCODEC_UTIL_H
 #define ADVENTOFCODEC_UTIL_H
 
-int PROGRAM_NAME_LENGTH;
+int static PROGRAM_NAME_LENGTH = 10;
 
 char *getInput(char *programPath);
 

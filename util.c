@@ -6,7 +6,15 @@
 #include <string.h>
 #include "util.h"
 
-int PROGRAM_NAME_LENGTH = 10;
+int getLength(FILE *fp) {
+    char ch;
+    int length = 0;
+    while(fgetc(fp) != EOF) {
+        length++;
+    }
+    fseek(fp, 0L, SEEK_SET);
+    return length;
+}
 
 char *getInput(char *programPath) {
     char inputFile[8];
@@ -15,12 +23,10 @@ char *getInput(char *programPath) {
     strcat(inputFile, ".txt");
     FILE *fp = fopen(inputFile, "r");
 
-    fseek(fp, 0L, SEEK_END);
-    int fileSize = ftell(fp);
+    int fileSize = getLength(fp);
     char input[fileSize + 1];
 
-    fseek(fp, 0L, SEEK_SET);
-    fread(input, fileSize, 1, fp);
+    fread(input, (size_t)fileSize, 1, fp);
     input[fileSize] = '\0';
 
     fclose(fp);

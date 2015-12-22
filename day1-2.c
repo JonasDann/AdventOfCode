@@ -18,7 +18,6 @@ int main(int argc, char *argv[]) {
         } else if (ch == ')') {
             floor--;
         }
-        //printf("Floor %i\n", floor);
         if (floor < 0) {
             printf("Position: %i", i + 1);
             return 0;
