@@ -47,13 +47,14 @@ int main(int argc, char *argv[]) {
         i++;
     }
 
+    freeList(&list);
+
     t2 = clock();
     int time = t2 - t1;
     printf("The answer was found in %i milliseconds\n", time);
 
     printf("Santa visited %i houses", totalHouses);
 
-    freeList(&list);
     free(input);
     return 0;
 }
