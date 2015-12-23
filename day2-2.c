@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "util/general.h"
 #include "util/present.h"
 
@@ -35,6 +36,8 @@ int main(int argc, char *argv[]) {
     }
 
     printf("Ribbon needed: %i", totalRibbon);
+
+    free(input);
     return 0;
 }
 

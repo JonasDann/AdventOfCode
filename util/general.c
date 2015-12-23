@@ -4,6 +4,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 #include "general.h"
 
 int static PROGRAM_NAME_LENGTH = 10;
@@ -26,7 +27,7 @@ char *getInput(char *programPath) {
     FILE *fp = fopen(inputFile, "r");
 
     int fileSize = getLength(fp);
-    char input[fileSize + 1];
+    char *input = malloc((fileSize + 1) * sizeof(char));
 
     fread(input, (size_t)fileSize, 1, fp);
     input[fileSize] = '\0';

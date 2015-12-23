@@ -3,6 +3,7 @@
 //
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "util/general.h"
 
 int main(int argc, char *argv[]) {
@@ -23,5 +24,6 @@ int main(int argc, char *argv[]) {
 
     printf("Floor: %i", floor);
 
+    free(input);
     return 0;
 }

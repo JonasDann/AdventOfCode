@@ -65,3 +65,19 @@ int checkAndInsert(PositionVisitedList *list, int x, int y) {
     return checkAndInsertY(list->array[x + list->negative_max], y);
 }
 
+void freeYList(PositionVisitedList *list) {
+    int i;
+    for (i = 0; i < list->size; i++) {
+        free(list->array[i]);
+    }
+    free(list->array);
+    free(list);
+}
+
+void freeList(PositionVisitedList *list) {
+    int i;
+    for (i = 0; i < list->size; i++) {
+        freeYList(list->array[i]);
+    }
+    free(list->array);
+}

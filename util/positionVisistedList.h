@@ -16,4 +16,6 @@ typedef struct {
 
 int checkAndInsert(PositionVisitedList *list, int x, int y);
 
+void freeList(PositionVisitedList *list);
+
 #endif //ADVENTOFCODEC_POSITIONVISISTEDLIST_H
