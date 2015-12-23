@@ -13,7 +13,7 @@ int main(int argc, char *argv[]) {
 
     int i = 0;
     char ch;
-    struct Present present;
+    Present present;
     int *presentDimensions = &present.x;
     int presentDimension = 0;
 

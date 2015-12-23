@@ -1,14 +1,14 @@
 #ifndef ADVENTOFCODEC_PRESENT_H
 #define ADVENTOFCODEC_PRESENT_H
 
-struct Present {
+typedef struct  {
     int x;
     int y;
     int z;
-};
+} Present;
 
-int getWrappingPaperNeededInSquareFoot(struct Present present);
+int getWrappingPaperNeededInSquareFoot(Present present);
 
-int getRibbonNeededInFoot(struct Present present);
+int getRibbonNeededInFoot(Present present);
 
 #endif //ADVENTOFCODEC_PRESENT_H

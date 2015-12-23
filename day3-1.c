@@ -5,36 +5,42 @@
 #include <stdio.h>
 #include "util/general.h"
 #include "util/present.h"
+#include "util/positionVisistedList.h"
 
 int main(int argc, char *argv[]) {
     char* input = getInput(argv[0]);
 
-    int totalRibbon = 0;
+    int totalHouses = 1;
+    int x = 0;
+    int y = 0;
 
     int i = 0;
-    char ch;
-    struct Present present;
-    int *presentDimensions = &present.x;
-    int presentDimension = 0;
+    PositionVisitedList list;
+    list.size = 0;
 
     while(input[i] != '\0') {
-        present.x = 0;
-        present.y = 0;
-        present.z = 0;
-        presentDimension = 0;
-        do {
-            while ((ch = input[i]) != 'x' && (ch != '\n')) {
-                presentDimensions[presentDimension] *= 10;
-                presentDimensions[presentDimension] += ch - 48;
-                i++;
-            }
-            presentDimension++;
-            i++;
-        } while (ch != '\n');
-        totalRibbon += getRibbonNeededInFoot(present);
+        switch (input[i]) {
+            case '^':
+                y--;
+                break;
+            case 'v':
+                y++;
+                break;
+            case '<':
+                x--;
+                break;
+            case'>':
+                x++;
+                break;
+            default:
+                printf("Illegal character");
+                return 1;
+        }
+        totalHouses += checkAndInsert(&list, x, y) ? 0 : 1;
+        i++;
     }
 
-    printf("Ribbon needed: %i", totalRibbon);
+    printf("Houses: %i", totalHouses);
     return 0;
 }
 
