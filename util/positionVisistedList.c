@@ -17,31 +17,31 @@ void createList(PositionVisitedList *list, size_t elementSize) {
     }
 }
 
-void expandList(PositionVisitedList *list, size_t elementSize, int negativeExpansion) {
-    list->array = realloc(list->array, (list->size + 5) * sizeof(void *));
+void expandList(PositionVisitedList *list, size_t expandBy, size_t elementSize, int negativeExpansion) {
+    list->array = realloc(list->array, (list->size + expandBy) * sizeof(void *));
     if (negativeExpansion) {
-        memmove(list->array, &list->array[5], list->size * sizeof(void *));
-        list->negative_max += 5;
+        memmove(&list->array[expandBy], list->array, list->size * sizeof(void *));
+        list->negative_max += expandBy;
     }
     int i;
-    for (i = negativeExpansion ? 0 : list->size; i < 5; i++) {
+    for (i = negativeExpansion ? 0 : list->size; i < (negativeExpansion ? expandBy : list->size + expandBy); i++) {
         list->array[i] = malloc(elementSize);
         memset(list->array[i], 0, elementSize);
     }
-    list->size += 5;
+    list->size += expandBy;
 }
 
 int checkAndInsertY(PositionVisitedList *list, int y) {
     if (list->size == 0) {
-        createList(list, sizeof(int *));
+        createList(list, sizeof(int));
     }
     if (y < 0) {
         if (-y > list->negative_max) {
-            expandList(list, sizeof(int *), 1);
+            expandList(list, -y - list->negative_max, sizeof(int), 1);
         }
     } else if (y > 0) {
         if (y > list->size - list->negative_max - 1) {
-            expandList(list, sizeof(int *), 0);
+            expandList(list, y - (list->size - list->negative_max - 1), sizeof(int), 0);
         }
     }
     int result = *(int *)list->array[y + list->negative_max];
@@ -51,15 +51,15 @@ int checkAndInsertY(PositionVisitedList *list, int y) {
 
 int checkAndInsert(PositionVisitedList *list, int x, int y) {
     if (list->size == 0) {
-        createList(list, sizeof(PositionVisitedList *));
+        createList(list, sizeof(PositionVisitedList));
     }
     if (x < 0) {
         if (-x > list->negative_max) {
-            expandList(list, sizeof(PositionVisitedList *), 1);
+            expandList(list, -x - list->negative_max, sizeof(PositionVisitedList), 1);
         }
     } else if (x > 0) {
         if (x > list->size - list->negative_max - 1) {
-            expandList(list, sizeof(PositionVisitedList *), 0);
+            expandList(list, x - (list->size - list->negative_max - 1), sizeof(PositionVisitedList), 0);
         }
     }
     return checkAndInsertY(list->array[x + list->negative_max], y);

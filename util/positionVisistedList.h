@@ -9,7 +9,7 @@
 #include <stddef.h>
 
 typedef struct {
-    void *array[];
+    void **array;
     size_t size;
     size_t negative_max;
 } PositionVisitedList;
