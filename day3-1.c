@@ -23,6 +23,8 @@ int main(int argc, char *argv[]) {
     PositionVisitedList list;
     list.size = 0;
 
+    checkAndInsert(&list, 0, 0);
+
     while(input[i] != '\0') {
         switch (input[i]) {
             case '^':
