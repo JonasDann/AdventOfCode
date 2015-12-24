@@ -17,6 +17,8 @@ add_executable(day4-1 day4-1.c util/general.c)
 add_executable(day4-2 day4-2.c util/general.c)
 add_executable(day5-1 day5-1.c util/general.c)
 add_executable(day5-2 day5-2.c util/general.c util/charPairCache.c)
+add_executable(day6-1 day6-1.c util/general.c util/lightGrid.c)
+add_executable(day6-2 day6-2.c util/general.c util/lightGrid.c)
 
 target_link_libraries(day4-1 eay32)
 target_link_libraries(day4-2 eay32)

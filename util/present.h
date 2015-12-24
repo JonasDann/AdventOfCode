@@ -1,11 +1,9 @@
 #ifndef ADVENTOFCODEC_PRESENT_H
 #define ADVENTOFCODEC_PRESENT_H
 
-typedef struct  {
-    int x;
-    int y;
-    int z;
-} Present;
+#include "general.h"
+
+typedef Vector3 Present;
 
 int getWrappingPaperNeededInSquareFoot(Present present);
 

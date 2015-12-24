@@ -13,17 +13,18 @@ void addCharPair(CharPairCache *cache, char *charPair) {
 
         int i;
         for (i = 0; i < 5; i++) {
-            cache->charPairs[i] = malloc(2 * sizeof(char *));
+            cache->charPairs[i] = malloc(2 * sizeof(char));
         }
     } else if (cache->size <= cache->used) {
         cache->size += 5;
         cache->charPairs = realloc(cache->charPairs, cache->size * sizeof(char *));
         int i;
         for (i = cache->size - 5; i < cache->size; i++) {
-            cache->charPairs[i] = malloc(2 * sizeof(char *));
+            cache->charPairs[i] = malloc(2 * sizeof(char));
         }
     }
-    memcpy(cache->charPairs[cache->used], charPair, 2 * sizeof(char *));
+    cache->charPairs[cache->used][0] = charPair[0];
+    cache->charPairs[cache->used][1] = charPair[1];
     cache->used++;
 }
 
