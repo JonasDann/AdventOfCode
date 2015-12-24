@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "util/general.h"
-#include <string.h>
+#include "util/charPairCache.h"
 
 int main(int argc, char *argv[]) {
     char *input = getInput(argv[0]);
@@ -19,34 +19,38 @@ int main(int argc, char *argv[]) {
     char lastChar;
     char nextToLastChar;
     int repeatOneLetterBetween;
-    char** charPairCache = malloc(5 * sizeof(char *));
-    int charPairCacheSize = 5;
-    int charPairCacheUsed;
+    CharPairCache cache;
+    cache.size = 0;
+    int charPairs;
     int niceStrings = 0;
 
     while (input[i] != '\0') {
         lastChar = '\0';
         nextToLastChar = '\0';
         repeatOneLetterBetween = 0;
-        charPairCacheUsed = 0;
+        cache.used = 0;
+        charPairs = 0;
         while (input[i] != '\n') {
             if (nextToLastChar == input[i]) {
                 repeatOneLetterBetween++;
             }
-            if (input[i] == 'a' || input[i] == 'e' || input[i] == 'i' || input[i] == 'o' || input[i] == 'u') {
-                vowels++;
+            if (lastChar != '\0' && hasCharPairNotOverlapping(&cache, &input[i - 1])) {
+                charPairs++;
             }
-            if (input[i] == lastChar) {
-                doubles++;
+            if (lastChar != '\0') {
+                addCharPair(&cache, &input[i - 1]);
             }
+            nextToLastChar = lastChar;
             lastChar = input[i];
             i++;
         }
-        if (!naughty && vowels > 2 && doubles > 0) {
+        if (repeatOneLetterBetween > 0 && charPairs > 0) {
             niceStrings++;
         }
         i++;
     }
+
+    freeCache(&cache);
 
     t2 = clock();
     int time = t2 - t1;
