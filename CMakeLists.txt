@@ -15,6 +15,7 @@ add_executable(day3-1 day3-1.c util/general.c util/positionVisistedList.c)
 add_executable(day3-2 day3-2.c util/general.c util/positionVisistedList.c)
 add_executable(day4-1 day4-1.c util/general.c)
 add_executable(day4-2 day4-2.c util/general.c)
+add_executable(day5-1 day5-1.c util/general.c)
 
 target_link_libraries(day4-1 eay32)
 target_link_libraries(day4-2 eay32)

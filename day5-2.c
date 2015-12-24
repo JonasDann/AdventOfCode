@@ -16,24 +16,22 @@ int main(int argc, char *argv[]) {
     t1 = clock();
 
     int i = 0;
-    int naughty;
     char lastChar;
-    int vowels;
-    int doubles;
+    char nextToLastChar;
+    int repeatOneLetterBetween;
+    char** charPairCache = malloc(5 * sizeof(char *));
+    int charPairCacheSize = 5;
+    int charPairCacheUsed;
     int niceStrings = 0;
 
     while (input[i] != '\0') {
-        naughty = 0;
-        vowels = 0;
-        doubles = 0;
         lastChar = '\0';
+        nextToLastChar = '\0';
+        repeatOneLetterBetween = 0;
+        charPairCacheUsed = 0;
         while (input[i] != '\n') {
-            if ((lastChar == 'a' && input[i] == 'b') || (lastChar == 'c' && input[i] == 'd') || (lastChar == 'p' && input[i] == 'q') || (lastChar == 'x' && input[i] == 'y')) {
-                naughty = 1;
-                while (input[i] != '\n') {
-                    i++;
-                }
-                continue;
+            if (nextToLastChar == input[i]) {
+                repeatOneLetterBetween++;
             }
             if (input[i] == 'a' || input[i] == 'e' || input[i] == 'i' || input[i] == 'o' || input[i] == 'u') {
                 vowels++;
@@ -54,7 +52,7 @@ int main(int argc, char *argv[]) {
     int time = t2 - t1;
     printf("The answer was found in %i milliseconds\n", time);
 
-    printf("There are %i nice strings.", niceStrings);
+    printf("There are %i nice strings", niceStrings);
 
     free(input);
     return 0;
