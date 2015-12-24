@@ -32,7 +32,7 @@ int main(int argc, char *argv[]) {
             toHashLength++;
             toHash = realloc(toHash, (size_t) toHashLength);
         }
-    } while (output[0] != 0 || output[1] != 0 || output[2] > 15);
+    } while (output[0] != 0 || output[1] != 0 || output[2] != 0);
 
     t2 = clock();
     int time = t2 - t1;
