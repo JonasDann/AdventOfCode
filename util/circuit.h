@@ -14,7 +14,8 @@ typedef enum {
     NOT,
     RSHIFT,
     OR,
-    FORWARD
+    FORWARD,
+    NONE
 } OPERATOR;
 
 typedef struct {

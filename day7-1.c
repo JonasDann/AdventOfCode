@@ -41,17 +41,28 @@ int main(int argc, char *argv[]) {
     char wire[5];
 
     while (input[i] != '\0') {
+        operator = NONE;
         if (input[i] == 'N') {
             operator = NOT;
             i += 4;
         } else if (input[i] > 47 && input[i] < 58) { //input[i] is digit
-            operator = CONSTANT;
             input1 = getConstant(circuit, readConstant(input, &i));
+            i++;
+            if (input[i] == '-') {
+                operator = CONSTANT;
+                i--;
+            }
         } else {
             readWireName(wire, &n, input, &i);
             input1 = getWireOutput(circuit, wire, n);
             i++;
-            switch(input[i]) {
+            if (input[i] == '-') {
+                operator = FORWARD;
+                i--;
+            }
+        }
+        if (operator == NONE) {
+            switch (input[i]) {
                 case 'A':
                     operator = AND;
                     i += 4;
@@ -67,10 +78,6 @@ int main(int argc, char *argv[]) {
                 case 'O':
                     operator = OR;
                     i += 3;
-                    break;
-                case '-':
-                    operator = FORWARD;
-                    i--;
                     break;
                 default:
                     printf("Illegal first operator character");
