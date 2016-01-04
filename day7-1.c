@@ -12,7 +12,7 @@ void readWireName(char *name, int *length, char *input, int *i) {
     *length = 0;
     while(input[*i] != ' ' && input[*i] != '\n') {
         name[*length] = input[*i];
-        i++; (*length)++;
+        (*i)++; (*length)++;
     }
 }
 
@@ -28,6 +28,7 @@ int readConstant(char *input, int *i) {
 
 int main(int argc, char *argv[]) {
     char *input = getInput(argv[0]);
+    input = "123 -> x\n456 -> y\nx AND y -> d\nx OR y -> e\nx LSHIFT 2 -> f\ny RSHIFT 2 -> g\nNOT x -> h\nNOT y -> i\n\0";
 
     clock_t t1, t2;
 
@@ -58,11 +59,11 @@ int main(int argc, char *argv[]) {
                     break;
                 case 'R':
                     operator = RSHIFT;
-                    i += 6;
+                    i += 7;
                     break;
                 case 'L':
                     operator = LSHIFT;
-                    i += 6;
+                    i += 7;
                     break;
                 case 'O':
                     operator = OR;
@@ -87,7 +88,9 @@ int main(int argc, char *argv[]) {
         addOrSetWire(circuit, wire, n, input1, operator, input2);
     }
 
-    int a = resolve(circuit);
+    int a = resolve(circuit, "d", 1);
+    int b = resolve(circuit, "e", 1);
+    int c = resolve(circuit, "f", 1);
     freeCircuit(circuit);
 
     t2 = clock();
@@ -95,6 +98,8 @@ int main(int argc, char *argv[]) {
     printf("The answer was found in %i milliseconds\n", time);
 
     printf("The value of wire a is %i.", a);
+    printf("The value of wire a is %i.", b);
+    printf("The value of wire a is %i.", c);
 
     free(input);
     return 0;
