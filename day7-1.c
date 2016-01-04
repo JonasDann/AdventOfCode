@@ -28,7 +28,6 @@ int readConstant(char *input, int *i) {
 
 int main(int argc, char *argv[]) {
     char *input = getInput(argv[0]);
-    input = "123 -> x\n456 -> y\nx AND y -> d\nx OR y -> e\nx LSHIFT 2 -> f\ny RSHIFT 2 -> g\nNOT x -> h\nNOT y -> i\n\0";
 
     clock_t t1, t2;
 
@@ -69,12 +68,16 @@ int main(int argc, char *argv[]) {
                     operator = OR;
                     i += 3;
                     break;
+                case '-':
+                    operator = FORWARD;
+                    i--;
+                    break;
                 default:
                     printf("Illegal first operator character");
                     return 1;
             }
         }
-        if (operator != CONSTANT) {
+        if (operator != CONSTANT && operator != FORWARD) {
             if (input[i] > 47 && input[i] < 58) { //input[i] is digit
                 input2 = getConstant(circuit, readConstant(input, &i));
             } else {
@@ -88,9 +91,7 @@ int main(int argc, char *argv[]) {
         addOrSetWire(circuit, wire, n, input1, operator, input2);
     }
 
-    int a = resolve(circuit, "d", 1);
-    int b = resolve(circuit, "e", 1);
-    int c = resolve(circuit, "f", 1);
+    int a = resolve(circuit, "a", 1);
     freeCircuit(circuit);
 
     t2 = clock();
@@ -98,8 +99,6 @@ int main(int argc, char *argv[]) {
     printf("The answer was found in %i milliseconds\n", time);
 
     printf("The value of wire a is %i.", a);
-    printf("The value of wire a is %i.", b);
-    printf("The value of wire a is %i.", c);
 
     free(input);
     return 0;

@@ -22,8 +22,9 @@ LinkedList *createLinkedList() {
 void freeLinkedList(LinkedList *list) {
     Element *element = list->firstElement;
     while(element != 0) {
+        Element *next = element->next;
         free(element);
-        element = element->next;
+        element = next;
     }
     free(list);
 }

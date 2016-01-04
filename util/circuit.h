@@ -5,13 +5,16 @@
 #ifndef ADVENTOFCODEC_CIRCUIT_H
 #define ADVENTOFCODEC_CIRCUIT_H
 
+#include "linkedList.h"
+
 typedef enum {
     CONSTANT,
     AND,
     LSHIFT,
     NOT,
     RSHIFT,
-    OR
+    OR,
+    FORWARD
 } OPERATOR;
 
 typedef struct {
@@ -24,12 +27,8 @@ typedef struct {
 } Wire;
 
 typedef struct {
-    Wire *wires; //TODO Change to linked list
-    int wiresSize;
-    int wiresUsed;
-    int *constants;
-    int constantsSize;
-    int constantsUsed;
+    LinkedList *wires;
+    LinkedList *constants;
 } Circuit;
 
 Circuit *createCircuit();
