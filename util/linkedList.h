@@ -11,12 +11,14 @@ typedef struct Element {
 } Element;
 
 typedef struct {
-   Element *firstElement;
+    Element *firstElement;
+    Element *lastElement;
 } LinkedList;
 
 LinkedList *createLinkedList();
 LinkedList *duplicateLinkedList(LinkedList *list);
 void add(LinkedList *list, void *value);
+void addLast(LinkedList *list, void *value);
 int length(LinkedList *list);
 void freeLinkedList(LinkedList *list);
 

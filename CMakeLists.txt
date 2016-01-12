@@ -25,6 +25,8 @@ add_executable(day8-1 day8-1.c util/general.c)
 add_executable(day8-2 day8-2.c util/general.c)
 add_executable(day9-1 day9-1.c util/general.c util/linkedList.c)
 add_executable(day9-2 day9-2.c util/general.c util/linkedList.c)
+add_executable(day10-1 day10-1.c util/linkedList.c)
+add_executable(day10-2 day10-2.c util/linkedList.c)
 
 target_link_libraries(day4-1 eay32)
 target_link_libraries(day4-2 eay32)
