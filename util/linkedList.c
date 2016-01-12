@@ -19,6 +19,16 @@ LinkedList *createLinkedList() {
     return result;
 }
 
+LinkedList *duplicateLinkedList(LinkedList *list) {
+    LinkedList *result = createLinkedList();
+    Element *e = list->firstElement;
+    while(e != 0) {
+        add(result, e->value);
+        e = e->next;
+    }
+    return result;
+}
+
 void freeLinkedList(LinkedList *list) {
     Element *element = list->firstElement;
     while(element != 0) {
@@ -27,4 +37,14 @@ void freeLinkedList(LinkedList *list) {
         element = next;
     }
     free(list);
+}
+
+int length(LinkedList *list) {
+    int length = 0;
+    Element *e = list->firstElement;
+    while(e != 0) {
+        length++;
+        e = e->next;
+    }
+    return length;
 }

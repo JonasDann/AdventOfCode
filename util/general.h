@@ -19,5 +19,7 @@ typedef struct {
 } Vector3;
 
 char *getInput(char *programPath);
+char *readString(char *input, int *i, char end);
+int readInteger(char *input, int *i);
 
 #endif //ADVENTOFCODEC_GENERAL_H

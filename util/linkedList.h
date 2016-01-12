@@ -14,8 +14,10 @@ typedef struct {
    Element *firstElement;
 } LinkedList;
 
-LinkedList * createLinkedList();
+LinkedList *createLinkedList();
+LinkedList *duplicateLinkedList(LinkedList *list);
 void add(LinkedList *list, void *value);
+int length(LinkedList *list);
 void freeLinkedList(LinkedList *list);
 
 #endif //ADVENTOFCODEC_LINKEDLIST_H

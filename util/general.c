@@ -35,3 +35,26 @@ char *getInput(char *programPath) {
     fclose(fp);
     return input;
 }
+
+char *readString(char *input, int *i, char end) {
+    char *string = malloc(sizeof(char));
+    int length = 0;
+    while (input[*i] != end) {
+        length++;
+        string = realloc(string, (length + 1) * sizeof(char));
+        string[length - 1] = input[*i];
+        (*i)++;
+    }
+    string[length] = 0;
+    return string;
+}
+
+int readInteger(char *input, int *i) {
+    int integer = 0;
+    while (input[*i] > 47 && input[*i] < 58) {
+        integer *= 10;
+        integer += input[*i] - 48;
+        (*i)++;
+    }
+    return integer;
+}
