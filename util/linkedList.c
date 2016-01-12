@@ -17,7 +17,7 @@ LinkedList *duplicateLinkedList(LinkedList *list) {
     LinkedList *result = createLinkedList();
     Element *e = list->firstElement;
     while(e != 0) {
-        addLast(result, e->value);
+        append(result, e->value);
         e = e->next;
     }
     return result;
@@ -33,7 +33,7 @@ void add(LinkedList *list, void *value) {
     }
 }
 
-void addLast(LinkedList *list, void *value) {
+void append(LinkedList *list, void *value) {
     Element *element = malloc(sizeof(Element));
     element->value = value;
     element->next = 0;

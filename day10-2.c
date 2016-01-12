@@ -17,12 +17,12 @@ int main(int argc, char *argv[]) {
     int i = 0;
     LinkedList *result = createLinkedList();
     while(input[i] != '\0') {
-        addLast(result, (void *) input[i] - 48);
+        append(result, (void *) input[i] - 48);
         i++;
     }
     LinkedList *new;
     int last, count;
-    for (i = 0; i < 50; i++) {
+    for (i = 0; i < 60; i++) {
         new = createLinkedList();
 
         Element *e = result->firstElement;
@@ -32,16 +32,16 @@ int main(int argc, char *argv[]) {
             while (e != 0) {
                 count++;
                 if ((int) e->value != last) {
-                    addLast(new, (void *) count);
-                    addLast(new, (void *) last);
+                    append(new, (void *) count);
+                    append(new, (void *) last);
                     count = 0;
                 }
                 last = (int) e->value;
                 e = e->next;
             }
             count++;
-            addLast(new, (void *) count);
-            addLast(new, (void *) last);
+            append(new, (void *) count);
+            append(new, (void *) last);
         } else {
             printf("There was a problem");
             return 1;
