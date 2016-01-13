@@ -5,7 +5,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <stdint.h>
 #include "util/linkedList.h"
+
+const int ARRAY_LENGTH = 50000;
 
 int main(int argc, char *argv[]) {
     char *input = "1113222113";
@@ -16,53 +19,89 @@ int main(int argc, char *argv[]) {
 
     int i = 0;
     LinkedList *result = createLinkedList();
+    append(result, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+    Element *e = result->firstElement;
+    int f = 0;
     while(input[i] != '\0') {
-        append(result, (void *) input[i] - 48);
-        i++;
+        ((int8_t *)e->value)[f] = (int8_t) (input[i] - 48);
+        i++; f++;
     }
+    ((int8_t *)e->value)[f] = 0;
     LinkedList *new = createLinkedList();
+    append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
     LinkedList *swap;
-    Element *e;
     Element *n;
-    int last, count;
+    int m;
+    int8_t last, count;
     for (i = 0; i < 50; i++) {
         e = result->firstElement;
+        f = 0;
         n = new->firstElement;
+        m = 0;
         if (e != 0) {
-            last = (int) e->value; count = 0;
-            e = e->next;
-            while (e != 0) {
+            last = ((int8_t *)e->value)[f]; count = 0;
+            f++;
+            while (e != 0 && ((int8_t *)e->value)[f] != 0) {
                 count++;
-                if ((int) e->value != last) {
-                    if (n != 0) {
-                        n->value = (void *) count;
+                if (((int8_t *)e->value)[f] != last) {
+                    if (m >= ARRAY_LENGTH) {
                         n = n->next;
-                    } else {
-                        append(new, (void *) count);
+                        if (n == 0) {
+                            append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+                            n = new->lastElement;
+                        }
+                        m = 0;
                     }
-                    if (n != 0) {
-                        n->value = (void *) last;
+                    ((int8_t *)n->value)[m] = count;
+                    m++;
+                    if (m >= ARRAY_LENGTH) {
                         n = n->next;
-                    } else {
-                        append(new, (void *) last);
+                        if (n == 0) {
+                            append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+                            n = new->lastElement;
+                        }
+                        m = 0;
                     }
+                    ((int8_t *)n->value)[m] = last;
+                    m++;
                     count = 0;
+                    last = ((int8_t *) e->value)[f];
                 }
-                last = (int) e->value;
-                e = e->next;
+                f = ++f < ARRAY_LENGTH ? f : 0;
+                if (f == 0) {
+                    e = e->next;
+                }
             }
             count++;
-            if (n != 0) {
-                n->value = (void *) count;
+            if (m >= ARRAY_LENGTH) {
                 n = n->next;
-            } else {
-                append(new, (void *) count);
+                if (n == 0) {
+                    append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+                    n = new->lastElement;
+                }
+                m = 0;
             }
-            if (n != 0) {
-                n->value = (void *) last;
-            } else {
-                append(new, (void *) last);
+            ((int8_t *)n->value)[m] = count;
+            m++;
+            if (m >= ARRAY_LENGTH) {
+                n = n->next;
+                if (n == 0) {
+                    append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+                    n = new->lastElement;
+                }
+                m = 0;
             }
+            ((int8_t *)n->value)[m] = last;
+            m++;
+            if (m >= ARRAY_LENGTH) {
+                n = n->next;
+                if (n == 0) {
+                    append(new, malloc(ARRAY_LENGTH * sizeof(int8_t)));
+                    n = new->lastElement;
+                }
+                m = 0;
+            }
+            ((int8_t *)n->value)[m] = 0;
         } else {
             printf("There was a problem");
             return 1;
@@ -72,7 +111,7 @@ int main(int argc, char *argv[]) {
         new = swap;
     }
 
-    int resultLength = length(result);
+    int resultLength = (length(result) - 1) * ARRAY_LENGTH + m;
 
     freeLinkedList(result);
     freeLinkedList(new);
