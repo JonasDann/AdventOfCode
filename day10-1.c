@@ -20,39 +20,62 @@ int main(int argc, char *argv[]) {
         append(result, (void *) input[i] - 48);
         i++;
     }
-    LinkedList *new;
+    LinkedList *new = createLinkedList();
+    LinkedList *swap;
+    Element *e;
+    Element *n;
     int last, count;
     for (i = 0; i < 40; i++) {
-        new = createLinkedList();
-
-        Element *e = result->firstElement;
+        e = result->firstElement;
+        n = new->firstElement;
         if (e != 0) {
             last = (int) e->value; count = 0;
             e = e->next;
             while (e != 0) {
                 count++;
                 if ((int) e->value != last) {
-                    append(new, (void *) count);
-                    append(new, (void *) last);
+                    if (n != 0) {
+                        n->value = (void *) count;
+                        n = n->next;
+                    } else {
+                        append(new, (void *) count);
+                    }
+                    if (n != 0) {
+                        n->value = (void *) last;
+                        n = n->next;
+                    } else {
+                        append(new, (void *) last);
+                    }
                     count = 0;
                 }
                 last = (int) e->value;
                 e = e->next;
             }
             count++;
-            append(new, (void *) count);
-            append(new, (void *) last);
+            if (n != 0) {
+                n->value = (void *) count;
+                n = n->next;
+            } else {
+                append(new, (void *) count);
+            }
+            if (n != 0) {
+                n->value = (void *) last;
+            } else {
+                append(new, (void *) last);
+            }
         } else {
             printf("There was a problem");
             return 1;
         }
-        freeLinkedList(result);
+        swap = result;
         result = new;
+        new = swap;
     }
 
     int resultLength = length(result);
 
     freeLinkedList(result);
+    freeLinkedList(new);
 
     t2 = clock();
     int time = t2 - t1;
