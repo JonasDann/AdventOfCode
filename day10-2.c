@@ -113,7 +113,17 @@ int main(int argc, char *argv[]) {
 
     int resultLength = (length(result) - 1) * ARRAY_LENGTH + m;
 
+    e = result->firstElement;
+    while(e != 0) {
+        free(e->value);
+        e = e->next;
+    }
     freeLinkedList(result);
+    n = new->firstElement;
+    while(n != 0) {
+        free(n->value);
+        n = n->next;
+    }
     freeLinkedList(new);
 
     t2 = clock();
