@@ -2,12 +2,9 @@
 // Created by Jonas on 22.12.2015.
 //
 
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
 #include "general.h"
 
-int static PROGRAM_NAME_LENGTH = 10;
+int static END_LENGTH = 6;
 
 int getLength(FILE *fp) {
     char ch;
@@ -20,9 +17,15 @@ int getLength(FILE *fp) {
 }
 
 char *getInput(char *programPath) {
-    char inputFile[8];
-    memcpy(inputFile, &programPath[strlen(programPath) - PROGRAM_NAME_LENGTH], 4);
-    inputFile[4] = '\0';
+    size_t pathLength = strlen(programPath);
+    int i = 0;
+    while (isDigit(programPath[pathLength - END_LENGTH - i - 1])) {
+        i++;
+    }
+    int filenameLength = 3 + i;
+    char inputFile[filenameLength + 1]; // day + number + \0
+    memcpy(inputFile, &programPath[pathLength - END_LENGTH - filenameLength], filenameLength);
+    inputFile[filenameLength] = '\0';
     strcat(inputFile, ".txt");
     FILE *fp = fopen(inputFile, "r");
 
@@ -47,6 +50,10 @@ char *readString(char *input, int *i, char end) {
     }
     string[length] = 0;
     return string;
+}
+
+bool isDigit(char character) {
+    return character > 47 && character < 58;
 }
 
 int readInteger(char *input, int *i) {
