@@ -130,3 +130,6 @@ crashlytics.properties
 crashlytics-build.properties
 
 # Created by .ignore support plugin (hsz.mobi)
+
+*_build
+/2016/Day*/Day*
