@@ -65,6 +65,4 @@ defmodule Day2 do
             keyMap.(x, y)
         end
     end
-
-
 end
