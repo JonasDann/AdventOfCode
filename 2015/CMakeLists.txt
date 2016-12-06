@@ -31,6 +31,7 @@ add_executable(day11-1 day11-1.c)
 add_executable(day11-2 day11-2.c)
 add_executable(day12-1 day12-1.c util/general.c)
 add_executable(day12-2 day12-2.c util/general.c)
+add_executable(day22-1 day22-1.c util/gameState.c)
 
 target_link_libraries(day4-1 eay32)
 target_link_libraries(day4-2 eay32)
