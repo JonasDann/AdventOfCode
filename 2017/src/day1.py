@@ -1,6 +1,3 @@
-from functools import reduce
-
-
 def equal_pair(pair):
     if pair[0] == pair[1]:
         return int(pair[0])
@@ -10,7 +7,7 @@ def equal_pair(pair):
 
 def sum_equal_pairs(char_pairs):
     equal_pairs = map(equal_pair, char_pairs)
-    return reduce(lambda x, y: x + y, equal_pairs)
+    return sum(equal_pairs)
 
 
 with open('../input/day1.txt', 'r') as file:
