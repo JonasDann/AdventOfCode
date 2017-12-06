@@ -4,7 +4,7 @@ with open('../input/day5.txt', 'r') as file:
     jumps = list(map(lambda string: int(string), rows))
     jumpCount = 0
     jumpPointer = 0
-    while jumpPointer >= 0 and jumpPointer < len(jumps):
+    while 0 <= jumpPointer < len(jumps):
         jumps[jumpPointer] += 1
         jumpPointer += jumps[jumpPointer] - 1
         jumpCount += 1
@@ -13,7 +13,7 @@ with open('../input/day5.txt', 'r') as file:
     jumps = list(map(lambda string: int(string), rows))
     jumpCount = 0
     jumpPointer = 0
-    while jumpPointer >= 0 and jumpPointer < len(jumps):
+    while 0 <= jumpPointer < len(jumps):
         jump = jumps[jumpPointer]
         if jumps[jumpPointer] < 3:
             jumps[jumpPointer] += 1
