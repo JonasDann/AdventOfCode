@@ -133,3 +133,6 @@ crashlytics-build.properties
 
 *_build
 /2016/Day*/Day*
+
+2018/debug
+2018/release
