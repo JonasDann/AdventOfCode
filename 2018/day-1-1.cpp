@@ -5,7 +5,7 @@ using namespace std;
 
 int main(int argc, char *argv[]) {
     auto start = clock();
-    ifstream input("./inputs/day-1-1.txt");
+    ifstream input("./inputs/day-1.txt");
 
     if (!input.is_open()) {
         return 1;
